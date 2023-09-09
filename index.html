@@ -48,7 +48,17 @@
     <!--[if lt IE 9]><input id="isIE8" type="hidden" autocomplete="off" /><![endif]-->
     <div name="parms">
         <input type="hidden" id="Url" value="RDpcb3cgb2ZmaWNlMzY1XG9mZmljZXdlYlxjYWNoZVxvZmZpY2VcMTAxLjEwMS4xMDIuNjQuODA4MFzlt6XnqIvmipXmoIfnlLPor7cucGRm" autocomplete="off">
-        <!-- 添加其他参数 -->
+        <input type="hidden" id="IsMobi" value="false" autocomplete="off">
+        <input type="hidden" id="ViewPath" value="img" autocomplete="off">
+        <input type="hidden" id="Furl" autocomplete="off">
+        <input type="hidden" id="ReadLimit" value="" autocomplete="off">
+        <input type="hidden" id="Tp" value="" autocomplete="off">
+        <input type="hidden" id="syn" data-host="" data-ctl="" data-user="">
+        <input type="hidden" id="DrawShow" value="0" autocomplete="off">
+        <input type="hidden" id="FileHash" autocomplete="off">
+        <input type="hidden" id="PcTouch" autocomplete="off">
+        <input type="hidden" id="LoadParm" data-srv="0" data-version="-1" data-comment="-1" autocomplete="off">
+        <input type="hidden" id="HD" value="" data-click="" autocomplete="off">
     </div>
     <div id="scaleMsg" style="position:absolute;margin-top:40px;width:120px;display:none;opacity:0.8;color:#262626;margin-left:5px;z-index:19830112;text-shadow:#FFF 1px 0 0,#FFF 0 1px 0,#FFF -1px 0 0,#FFF 0 -1px 0;font-size:15px">缩放：100%</div>
     <div style="background:#4e4e4e;text-align:center;height:36px;position:absolute;z-index:1000000;width:100%;top:0">
@@ -56,6 +66,7 @@
             <div id="addBtn" style="background-position: 0px 0px;" class="tool bdr"></div>
             <div style="" class="split"></div>
             <div id="subBtn" style="background-position: 0px -32px;" class="tool bdr"></div>
+
         </div>
         <div id="pageBtn" style="width:106px;height:32px;margin:auto;font-size:14px;line-height:36px;color:#FFF;" class="bdr">
             <div id="pageIndex" style="float:left;width:36px;text-align:right;font-size:14px">1</div>
@@ -67,7 +78,34 @@
                 <div style="opacity:0.5;background:#767676;border-radius:3px;z-index:888886"></div>
             </div>
         </div>
-        <!-- 添加其他内容 -->
+        <div id="recordDiv" onclick="javascript:this.style.display='none'" style="text-align:center;width:236px;left:50%; margin-left:-118px;height:98px;margin-top:60px;position:absolute;font-size:18px;display:none">
+            <div style="position:absolute;line-height:36px;z-index:100000001;margin-top:18px">
+                <div style="color:#FFF;width:236px"><span>记录您上次看到第</span> <span id="recordIdx"></span> <span>页</span></div>
+                <div style="color:#DA7831;width:100px;margin:auto;cursor:pointer" onclick="goPage(0)">从头开始</div>
+            </div>
+            <div style="background-color:#000;position:absolute;width:236px;height:98px;opacity:0.7;filter:Alpha(opacity=70);border-radius:3px;z-index:100000000"></div>
+        </div>
+        <div style="border:1px solid #4e4e4e;width:86px;height:32px;position:absolute;margin-top:-34px;right:-6px">
+            <div id="preBtn" style="background-position: -1px -127px;" class="tool bdr"></div>
+            <div style="" class="split"></div>
+            <div id="nextBtn" style="background-position: -1px -161px;" class="tool bdr"></div>
+        </div>
+    </div>
+    <div id="pageInfo" style="position:absolute;z-index:999999;width:106px;margin-top:36px;z-index:10088;text-align:center;background:#4e4e4e;color:#FFF;overflow-y:scroll;font-size:14px;display:none"></div>
+    <div id="preMsg" style="width:10px;height:80px;position:absolute;margin-top:180px;margin-left:26px;font-size:12px;color:#dcdcdc">上一页</div>
+    <div id="nextMsg" style="width:10px;height:80px;position:absolute;margin-top:180px;right:26px;font-size:12px;color:#dcdcdc">下一页</div>
+    
+    <div id="ctn" data-scale="100" style="margin-top:36px;width:0px;margin-left:0px;overflow-x:hidden;overflow-y:scroll; position:absolute;-webkit-overflow-scrolling:touch;"></div>
+    <div id="paint" title="单击隐藏" style="display:none;position: absolute;width: 100px;height: 100px;border: 1px solid #121111;bottom: 5px;right: 17px;background-color: #040404;opacity: 0.5;box-shadow: 1px 1px 15px 1px #000000;">
+        <div id="synM" class="synDiv" style="margin-top:20px;font-size:14px">主控模式</div>
+        <div style="width: 100px;height: 30px;margin: 0 auto;">
+            <div id="synC" style="width: 8px;height:8px;background-color: #17b059;float:left;margin-left:21px;margin-top: 5px;"></div>
+            <div id="synB" class="synDiv" style="float:left"><span style="margin-left: 10px;">控制端</span></div>
+        </div>
+        <div style="margin-top:-16px;position: absolute;">
+            <span class="synDiv" style="margin-left: 26px;">人数: </span>
+            <span id="synCount" class="synDiv" style="">1</span>
+        </div>
     </div>
     
     <!-- 添加其他页面内容 -->
@@ -80,16 +118,7 @@
 
     <!-- 在这里可以添加JavaScript代码来处理事件 -->
 
-    <div style="border:1px solid #4e4e4e;width:86px;height:32px;position:absolute;margin-top:-34px;right:-6px">
-        <div id="preBtn" style="background-position: -1px -127px;" class="tool bdr"></div>
-        <div style="" class="split"></div>
-        <div id="nextBtn" style="background-position: -1px -161px;" class="tool bdr"></div>
-    </div>
-    <div id="pageInfo" style="position:absolute;z-index:999999;width:106px;margin-top:36px;z-index:10088;text-align:center;background:#4e4e4e;color:#FFF;overflow-y:scroll;font-size:14px;display:none"></div>
-    <div id="preMsg" style="width:10px;height:80px;position:absolute;margin-top:180px;margin-left:26px;font-size:12px;color:#dcdcdc">上一页</div>
-    <div id="nextMsg" style="width:10px;height:80px;position:absolute;margin-top:180px;right:26px;font-size:12px;color:#dcdcdc">下一页</div>
-
-    <!-- 在这里可以添加JavaScript代码来处理事件 -->
+    
 
 </body>
 </html>
